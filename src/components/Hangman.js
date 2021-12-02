@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Hangman.css";
-// import { randomWord } from "./Words";
+
 import step0 from "../img/1.png";
 import step1 from "../img/2.png";
 import step2 from "../img/3.png";
@@ -10,7 +10,6 @@ import step5 from "../img/6.png";
 import step6 from "../img/7.png";
 
 class Hangman extends Component {
-
   //Upload all images in the component
   static defaultProps = {
     maxWrong: 6,
@@ -25,13 +24,6 @@ class Hangman extends Component {
       answer: "",
     };
   }
-
-  // componentDidMount() {
-  //   this.setState({
-  //     guessed: new Set([]),
-  //     answer: this.props.randomWord,
-  //   });
-  // }
 
   guessedWord() {
     return this.state.answer
@@ -67,12 +59,21 @@ class Hangman extends Component {
       mistake: 0,
       guessed: new Set([]),
       answer: this.props.randomWord,
+      gameOver: false,
+      isWinner: false,
     });
+
+    this.props.setWord();
   };
+
+startGame = () =>{
+
+}
+
   render() {
     console.log("Answer: " + this.props.randomWord);
     const gameOver = this.state.mistake >= this.props.maxWrong;
-    const isWinner = this.guessedWord().join("") === this.state.answer ;
+    const isWinner = this.guessedWord().join("") === this.state.answer;
     let gameStat = this.generateButtons();
 
     if (isWinner) {
